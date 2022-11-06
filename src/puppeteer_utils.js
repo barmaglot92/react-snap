@@ -142,7 +142,6 @@ const crawl = async opt => {
     sourceDir
   } = opt;
   const exclude = options.exclude.map(g => glob(g, { extended: true, globstar: true}));
-  console.log(exclude)
   let shuttingDown = false;
   let streamClosed = false;
 
