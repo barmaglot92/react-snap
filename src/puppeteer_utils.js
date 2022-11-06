@@ -5,6 +5,7 @@ const mapStackTrace = require("sourcemapped-stacktrace-node").default;
 const path = require("path");
 const fs = require("fs");
 const { createTracker, augmentTimeoutError } = require("./tracker");
+const glob = require('glob');
 
 const errorToString = jsHandle =>
   jsHandle.executionContext().evaluate(e => e.toString(), jsHandle);
