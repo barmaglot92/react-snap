@@ -140,6 +140,7 @@ const crawl = async opt => {
     publicPath,
     sourceDir
   } = opt;
+  const exclude = options.exclude.map(g => glob(g, { extended: true, globstar: true}));
   let shuttingDown = false;
   let streamClosed = false;
 
@@ -175,6 +176,8 @@ const crawl = async opt => {
   const addToQueue = newUrl => {
     const { hostname, search, hash, port } = url.parse(newUrl);
     newUrl = newUrl.replace(`${search || ""}${hash || ""}`, "");
+
+    if (exclude.filter(regex => regex.test(pathname)).length > 0) return;
 
     // Ensures that only link on the same port are crawled
     //
